@@ -1,18 +1,18 @@
 // importing DB connection file
 import "./config/database.js";
 import app from "./config/app.js";
-import express from "express";
+// import express from "express";
 import "dotenv/config";
-import path from 'path';
-import { fileURLToPath } from 'url';
+// import path from 'path';
+// import { fileURLToPath } from 'url';
 import TelegramBot from 'node-telegram-bot-api';
 import schedule from 'node-schedule';
 import axios from 'axios';
 import { addIphone, deleteIphone, getChatId, getIphoneList, subscriber } from './controllers/index.js'
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-app.use(express.static(__dirname + '/public'));
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
+// app.use(express.static(__dirname));
 
 const PORT = process.env.PORT || 9002;
 
