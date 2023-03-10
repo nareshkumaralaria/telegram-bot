@@ -1,0 +1,101 @@
+<%- include('header.ejs') %>
+
+    <div class="container">
+
+        <a href="/" class="link">
+            <button type="button" class="btn btn-outline-primary btn-sm">
+                <i class="bi bi-arrow-left-short"></i>
+                back to page
+            </button>
+        </a>
+
+        <div class="card mt-4">
+            <div class="card-body">
+                <h5 class="modal-title text-center">Add New iPhone</h5>
+                <form class="my-2" action="/addiphone" method="post">
+                    <div class="mb-3">
+                        <label for="asincode" class="form-label">ASIN Code</label>
+                        <input type="text" class="form-control" id="asincode" name="asincode"
+                            aria-describedby="emailHelp">
+                    </div>
+                    <div class="mb-3">
+                        <label for="iphonename" class="form-label">iPhone Name</label>
+                        <input type="text" class="form-control" id="iphonename" name="iphonename">
+                    </div>
+                    <div class="mb-3">
+                        <label for="storagesize" class="form-label">Storage Size</label>
+                        <input type="text" class="form-control" id="storagesize" name="storagesize">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </form>
+            </div>
+        </div>
+
+
+        <div class="table-responsive my-2">
+            <table class="table table-hover table-bordered caption-top">
+                <caption class="text-center fs-5 fw-bold">List of iPhone</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">S.no</th>
+                        <th scope="col">ASIN Code</th>
+                        <th scope="col">iPhone Name</th>
+                        <th scope="col">Storage Size</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% iphonelists.forEach(function(iphonelist, index) { %>
+                        <tr>
+                            <th scope="row">
+                                <%=index+1%>
+                            </th>
+                            <td>
+                                <%=iphonelist.asin_code%>
+                            </td>
+                            <td>
+                                <%=iphonelist.iphone_name%>
+                            </td>
+                            <td>
+                                <%=iphonelist.storage_size%>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                    data-bs-target="#deleteiphone" data-bs-whatever=<%=iphonelist.asin_code%> >
+                                    <i class="bi bi-trash3"></i>
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+                        <% })%>
+                </tbody>
+            </table>
+
+            <div class="modal fade" id="deleteiphone" tabindex="-1" aria-labelledby="deleteModal" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="deleteModal">New message to</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="/deleteiphone" method="post">
+                                <div class="mb-3">
+                                    <label for="asincode" class="col-form-label">ASIN Code:</label>
+                                    <input type="text" class="form-control" id="asincode" name="asincode">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                    <button type="submit" class="btn btn-danger">Yes</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <%- include('footer.ejs') %>

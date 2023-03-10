@@ -1,0 +1,85 @@
+<%- include('header.ejs') %>
+
+    <div class="container">
+
+        <a href="/" class="link">
+            <button type="button" class="btn btn-outline-primary btn-sm">
+                <i class="bi bi-arrow-left-short"></i>
+                back to page
+            </button>
+        </a>
+        <div class="table-responsive my-2">
+            <table class="table table-hover table-bordered caption-top">
+                <caption class="text-center fs-5 fw-bold">List of Subscribers</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">S.no</th>
+                        <th scope="col">Chat id</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% subscribers.forEach(function(subscriber, index) { %>
+                        <tr>
+                            <th scope="row">
+                                <%=index+1%>
+                            </th>
+                            <td>
+                                <%=subscriber.chat_id%>
+                            </td>
+                            <td>
+                                <%=subscriber.first_name%>
+                            </td>
+                            <td>
+                                <%=subscriber.last_name%>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                    data-bs-target="#sendMessageModal" data-bs-whatever=<%=subscriber.chat_id%> >
+                                    <i class="bi bi-send"></i>
+                                    Send Message
+                                </button>
+                                <button type="button" class="btn btn-outline-danger btn-sm">
+                                    <i class="bi bi-slash-circle"></i>
+                                    Block
+                                </button>
+                            </td>
+                        </tr>
+                        <% })%>
+                </tbody>
+            </table>
+
+            <div class="modal fade" id="sendMessageModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">New message to</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="/success" method="post">
+                                <div class="mb-3">
+                                    <label for="recipient-name" class="col-form-label">Chat_id:</label>
+                                    <input type="text" class="form-control" id="chat_id" name="chai_id">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="message-text" class="col-form-label">Message:</label>
+                                    <textarea class="form-control" name="message" id="message-text"></textarea>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Send message</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <%- include('footer.ejs') %>
