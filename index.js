@@ -74,7 +74,7 @@ bot.onText(/\/subscribe/, async (msg) => {
 });
 
 app.get("/", (req, res) => {
-    res.render("index.ejs");
+    res.render("index");
 });
 
 app.get("/subscribers", async (req, res) => {
