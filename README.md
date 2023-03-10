@@ -13,10 +13,8 @@ Telegram bot using nodejs which will allow user to subscribe for getting daily u
 - An admin panel for updating bot settings and managing user accounts.
 
 
-## Live Link
-
-For live preview you can visit this link
-https://ast-telegram-bot.netlify.app/
+## Bot Link
+t.me/DailyIphonePrice_Bot
 
 ## Run Locally
 
