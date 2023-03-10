@@ -74,23 +74,20 @@ bot.onText(/\/subscribe/, async (msg) => {
 });
 
 app.get("/", (req, res) => {
-    res.render("index");
+    res.render("index.ejs");
 });
 
 app.get("/subscribers", async (req, res) => {
     const response = await getChatId();
-    res.render("subscribers", {
+    res.render("subscribers.ejs", {
         subscribers: response.subscribers
     });
-});
-app.get("/managebot", async (req, res) => {
-    res.render("managebot");
 });
 
 app.post("/success", async (req, res) => {
     const { chai_id, message } = req.body;
     bot.sendMessage(chai_id, message);
-    res.render("success", {
+    res.render("success.ejs", {
         message: "Message send successfully",
     });
 })
@@ -98,7 +95,7 @@ app.post("/success", async (req, res) => {
 app.get("/iphonelist", async (req, res) => {
     const response = await getIphoneList();
     if (response.success) {
-        res.render("iphonelist", {
+        res.render("iphonelist.ejs", {
             iphonelists: response.iphonelist
         });
     } else {
@@ -109,7 +106,7 @@ app.post("/deleteiphone", async (req, res) => {
     const { asincode } = req.body;
     const response = await deleteIphone(asincode);
     if (response.success) {
-        res.render("success", {
+        res.render("success.ejs", {
             message: response.message,
         });
     }
@@ -119,7 +116,7 @@ app.post("/addiphone", async (req, res) => {
     const { asincode, iphonename, storagesize } = req.body;
     const response = await addIphone(asincode, iphonename, storagesize);
     if (response.success) {
-        res.render("success", {
+        res.render("success.ejs", {
             message: response.message,
         });
     }
